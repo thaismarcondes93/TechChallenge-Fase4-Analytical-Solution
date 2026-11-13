@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Pipeline completo (dados reais)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_all.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pipeline com dados SINTÉTICOS (teste)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_all.py",
+      "args": ["--sample", "--out", "outputs_sintetico", "--processed", "data/processed_sintetico"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

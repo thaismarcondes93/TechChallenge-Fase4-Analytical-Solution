@@ -1,0 +1,148 @@
+// =====================================================================================
+// MEDIDAS DAX - Tech Challenge Amazon
+// Crie uma tabela vazia chamada _Medidas (Modelagem > Nova tabela: _Medidas = {1}) e cole
+// cada medida em "Nova medida". As colunas referenciadas vêm do dados_powerbi.xlsx
+// (Caminho A) ou das consultas M (Caminho B + colunas_calculadas.dax).
+// Formatos sugeridos estão no comentário "// fmt:" de cada medida.
+// =====================================================================================
+
+// ------------------------------------------------------------------ 1. Indicadores base
+Qtd Produtos = DISTINCTCOUNT ( Fato_Produto[product_id] )                         // fmt: inteiro
+Qtd Categorias = DISTINCTCOUNT ( Fato_Produto[categoria_nivel1] )                 // fmt: inteiro
+Total Avaliações = SUM ( Fato_Produto[rating_count] )                             // fmt: inteiro
+Avaliações por Produto = DIVIDE ( [Total Avaliações], [Qtd Produtos] )            // fmt: inteiro
+Rating Médio = AVERAGE ( Fato_Produto[rating] )                                   // fmt: 0,00
+Rating Ajustado Médio = AVERAGE ( Fato_Produto[rating_ajustado] )                 // fmt: 0,00
+Desconto Médio = AVERAGE ( Fato_Produto[discount_percentage] )                    // fmt: 0,0%
+Preço Médio Original = AVERAGE ( Fato_Produto[actual_price] )                     // fmt: #,0
+Preço Médio Final = AVERAGE ( Fato_Produto[discounted_price] )                    // fmt: #,0
+Economia Média = AVERAGE ( Fato_Produto[desconto_valor] )                         // fmt: #,0
+
+// Nota média em que cada produto pesa pelo número de avaliações
+Rating Ponderado =                                                                // fmt: 0,00
+VAR T =
+    FILTER (
+        Fato_Produto,
+        NOT ISBLANK ( Fato_Produto[rating] ) && NOT ISBLANK ( Fato_Produto[rating_count] )
+    )
+RETURN
+    DIVIDE (
+        SUMX ( T, Fato_Produto[rating] * Fato_Produto[rating_count] ),
+        SUMX ( T, Fato_Produto[rating_count] )
+    )
+
+% Produtos Nota ≥ 4 =                                                             // fmt: 0,0%
+DIVIDE (
+    CALCULATE ( COUNTROWS ( Fato_Produto ), Fato_Produto[rating] >= 4 ),
+    COUNT ( Fato_Produto[rating] )
+)
+
+// Proxy de volume (avaliações x preço final). NÃO é receita: rotule assim no visual.
+Valor Movimentado (proxy) =
+SUMX ( Fato_Produto, Fato_Produto[discounted_price] * Fato_Produto[rating_count] )
+
+Participação nas Avaliações =                                                     // fmt: 0,0%
+DIVIDE ( [Total Avaliações], CALCULATE ( [Total Avaliações], ALLSELECTED ( Fato_Produto ) ) )
+
+// ------------------------------------------------------------------ 2. Concentração
+Participação Top 10 Produtos =                                                    // fmt: 0,0%
+VAR Top10 = TOPN ( 10, ALLSELECTED ( Fato_Produto ), Fato_Produto[rating_count], DESC )
+RETURN
+    DIVIDE (
+        SUMX ( Top10, Fato_Produto[rating_count] ),
+        CALCULATE ( [Total Avaliações], ALLSELECTED ( Fato_Produto ) )
+    )
+
+Categoria Líder em Avaliações =
+VAR T = TOPN ( 1, ALLSELECTED ( Fato_Produto[categoria_nivel1] ), [Total Avaliações], DESC )
+RETURN CONCATENATEX ( T, Fato_Produto[categoria_nivel1], ", " )
+
+// ------------------------------------------------------------------ 3. Quadrantes
+Qtd Alerta = CALCULATE ( [Qtd Produtos], Fato_Produto[quadrante] = "Alerta" )
+Qtd Estrelas = CALCULATE ( [Qtd Produtos], Fato_Produto[quadrante] = "Estrela" )
+Qtd Joias Escondidas = CALCULATE ( [Qtd Produtos], Fato_Produto[quadrante] = "Joia escondida" )
+
+% Avaliações em Alerta =                                                          // fmt: 0,0%
+DIVIDE ( CALCULATE ( [Total Avaliações], Fato_Produto[quadrante] = "Alerta" ), [Total Avaliações] )
+
+// ------------------------------------------------------------------ 4. Preço, desconto, satisfação
+// Pearson (a análise em Python traz também Spearman com IC95%, mais robusto a outliers).
+Correlação Desconto × Nota =
+VAR T =
+    FILTER (
+        ALLSELECTED ( Fato_Produto ),
+        NOT ISBLANK ( Fato_Produto[discount_percentage] ) && NOT ISBLANK ( Fato_Produto[rating] )
+    )
+VAR n = COUNTROWS ( T )
+VAR sx = SUMX ( T, Fato_Produto[discount_percentage] )
+VAR sy = SUMX ( T, Fato_Produto[rating] )
+VAR sxy = SUMX ( T, Fato_Produto[discount_percentage] * Fato_Produto[rating] )
+VAR sxx = SUMX ( T, Fato_Produto[discount_percentage] ^ 2 )
+VAR syy = SUMX ( T, Fato_Produto[rating] ^ 2 )
+RETURN
+    DIVIDE ( n * sxy - sx * sy, SQRT ( ( n * sxx - sx ^ 2 ) * ( n * syy - sy ^ 2 ) ) )
+
+// Mesma ideia para engajamento: o log evita que poucos produtos gigantes dominem.
+Correlação Desconto × Engajamento =
+VAR T =
+    FILTER (
+        ALLSELECTED ( Fato_Produto ),
+        NOT ISBLANK ( Fato_Produto[discount_percentage] ) && NOT ISBLANK ( Fato_Produto[rating_count] )
+            && Fato_Produto[rating_count] > 0
+    )
+VAR n = COUNTROWS ( T )
+VAR sx = SUMX ( T, Fato_Produto[discount_percentage] )
+VAR sy = SUMX ( T, LN ( Fato_Produto[rating_count] ) )
+VAR sxy = SUMX ( T, Fato_Produto[discount_percentage] * LN ( Fato_Produto[rating_count] ) )
+VAR sxx = SUMX ( T, Fato_Produto[discount_percentage] ^ 2 )
+VAR syy = SUMX ( T, LN ( Fato_Produto[rating_count] ) ^ 2 )
+RETURN
+    DIVIDE ( n * sxy - sx * sy, SQRT ( ( n * sxx - sx ^ 2 ) * ( n * syy - sy ^ 2 ) ) )
+
+Texto Correlação Desconto × Nota =
+VAR r = [Correlação Desconto × Nota]
+RETURN
+    "Correlação (Pearson) entre desconto e nota: " & FORMAT ( r, "0.00" ) & " ("
+        & SWITCH ( TRUE (), ABS ( r ) < 0.1, "desprezível", ABS ( r ) < 0.3, "fraca", ABS ( r ) < 0.5, "moderada", "forte" )
+        & "). Correlação não é causalidade."
+
+// ------------------------------------------------------------------ 5. Customer Insights
+Menções Tema = SUM ( Fato_ProdutoTema[mencoes] )
+
+// Menções por 1.000 palavras de review, para não favorecer produtos com mais reviews.
+// Dim_Tema filtra só Fato_ProdutoTema; por isso o denominador não muda por tema.
+Menções por Mil Palavras (Nota Alta) =                                            // fmt: 0,0
+DIVIDE (
+    CALCULATE ( [Menções Tema], Fato_Produto[grupo_nota] = "Alta" ) * 1000,
+    CALCULATE ( SUM ( Fato_Produto[n_palavras] ), Fato_Produto[grupo_nota] = "Alta" )
+)
+
+Menções por Mil Palavras (Nota Baixa) =                                           // fmt: 0,0
+DIVIDE (
+    CALCULATE ( [Menções Tema], Fato_Produto[grupo_nota] = "Baixa" ) * 1000,
+    CALCULATE ( SUM ( Fato_Produto[n_palavras] ), Fato_Produto[grupo_nota] = "Baixa" )
+)
+
+// > 1: o tema aparece proporcionalmente mais nos produtos de nota baixa
+Lift Tema (Baixa ÷ Alta) =                                                        // fmt: 0,00"x"
+DIVIDE ( [Menções por Mil Palavras (Nota Baixa)], [Menções por Mil Palavras (Nota Alta)] )
+
+Saldo de Sentimento Médio = AVERAGE ( Fato_Produto[saldo_sentimento] )            // fmt: 0,00 (-1 a +1)
+
+Produtos com Saldo Negativo =
+CALCULATE ( [Qtd Produtos], Fato_Produto[saldo_sentimento] < 0 )
+
+// ------------------------------------------------------------------ 6. Complementos usados nas páginas
+Avaliações Medianas = MEDIAN ( Fato_Produto[rating_count] )                       // fmt: inteiro
+
+// Menções por 1.000 palavras (todas as notas). O denominador vem de Fato_Produto, que Dim_Tema não filtra.
+Menções por Mil Palavras =                                                        // fmt: 0,0
+DIVIDE ( [Menções Tema] * 1000, SUM ( Fato_Produto[n_palavras] ) )
+
+// Títulos dinâmicos (Formatar visual > Título > fx > Valor do campo)
+Título Alerta =
+[Qtd Alerta] & " produtos em Alerta (alto engajamento, nota baixa) concentram "
+    & FORMAT ( [% Avaliações em Alerta], "0%" ) & " das avaliações"
+
+Título Joias =
+[Qtd Joias Escondidas] & " produtos com nota alta e pouca visibilidade: oportunidade de destaque"

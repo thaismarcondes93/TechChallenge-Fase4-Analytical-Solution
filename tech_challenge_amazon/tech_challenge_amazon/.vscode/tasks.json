@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1) Instalar dependências",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} -m pip install -r requirements.txt",
+      "problemMatcher": []
+    },
+    {
+      "label": "2) Rodar pipeline (dados reais em data/raw/amazon.csv)",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} run_all.py",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "3) Baixar do Kaggle e rodar",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} run_all.py --download",
+      "problemMatcher": []
+    },
+    {
+      "label": "4) Testar a instalação com dados SINTÉTICOS",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} run_all.py --sample --out outputs_sintetico --processed data/processed_sintetico",
+      "problemMatcher": []
+    },
+    {
+      "label": "5) Rodar testes",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} -m unittest discover -s tests -v",
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "6) Regerar consultas Power Query (após mudar config.py)",
+      "type": "shell",
+      "command": "${command:python.interpreterPath} -m techchallenge.gerar_power_query",
+      "problemMatcher": []
+    }
+  ]
+}

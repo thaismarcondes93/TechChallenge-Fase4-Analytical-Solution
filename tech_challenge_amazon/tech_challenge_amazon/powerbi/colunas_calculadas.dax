@@ -1,0 +1,42 @@
+// =====================================================================================
+// COLUNAS CALCULADAS - SÓ NECESSÁRIAS NO CAMINHO B (transformações feitas no Power Query).
+// No Caminho A (dados_powerbi.xlsx gerado pelo Python) estas colunas já vêm prontas;
+// NÃO as recrie, senão ficam duplicadas.
+// Crie em Fato_Produto (Modelagem > Nova coluna). Mesma lógica de techchallenge/prepare.py.
+// =====================================================================================
+
+// Média bayesiana: puxa produtos com poucas avaliações para a média geral.
+rating_ajustado =
+VAR v = Fato_Produto[rating_count]
+VAR R = Fato_Produto[rating]
+VAR C = AVERAGE ( Fato_Produto[rating] )
+VAR m = MEDIAN ( Fato_Produto[rating_count] )
+RETURN
+    IF ( ISBLANK ( R ) || ISBLANK ( v ), BLANK (), DIVIDE ( v, v + m ) * R + DIVIDE ( m, v + m ) * C )
+
+grupo_nota =
+VAR Rt = Fato_Produto[rating]
+VAR Baixo = PERCENTILE.INC ( Fato_Produto[rating], 0.25 )
+VAR Alto = PERCENTILE.INC ( Fato_Produto[rating], 0.75 )
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( Rt ), "Sem dados", Rt < Baixo, "Baixa", Rt >= Alto, "Alta", "Média" )
+
+grupo_engajamento =
+VAR Qt = Fato_Produto[rating_count]
+VAR Baixo = PERCENTILE.INC ( Fato_Produto[rating_count], 0.25 )
+VAR Alto = PERCENTILE.INC ( Fato_Produto[rating_count], 0.75 )
+RETURN
+    SWITCH ( TRUE (), ISBLANK ( Qt ), "Sem dados", Qt >= Alto, "Alto", Qt <= Baixo, "Baixo", "Médio" )
+
+quadrante =
+VAR N = Fato_Produto[grupo_nota]
+VAR E = Fato_Produto[grupo_engajamento]
+RETURN
+    SWITCH (
+        TRUE (),
+        N = "Sem dados" || E = "Sem dados", "Sem dados",
+        E = "Alto" && N = "Baixa", "Alerta",
+        E = "Alto" && N = "Alta", "Estrela",
+        E = "Baixo" && N = "Alta", "Joia escondida",
+        "Demais"
+    )

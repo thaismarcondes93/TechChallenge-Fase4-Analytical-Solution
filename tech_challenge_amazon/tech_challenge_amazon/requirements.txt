@@ -1,0 +1,6 @@
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.7
+openpyxl>=3.1
+# Opcional: só necessário para baixar o dataset direto do Kaggle (python run_all.py --download)
+kagglehub>=0.3

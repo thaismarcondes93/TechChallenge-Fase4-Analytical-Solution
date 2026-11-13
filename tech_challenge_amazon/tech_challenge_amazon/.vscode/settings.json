@@ -1,0 +1,9 @@
+{
+  "files.encoding": "utf8",
+  "python.testing.unittestEnabled": true,
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestArgs": ["-v", "-s", "./tests", "-p", "test_*.py"],
+  "python.analysis.typeCheckingMode": "off",
+  "[markdown]": { "editor.wordWrap": "on" },
+  "[python]": { "editor.tabSize": 4 }
+}
