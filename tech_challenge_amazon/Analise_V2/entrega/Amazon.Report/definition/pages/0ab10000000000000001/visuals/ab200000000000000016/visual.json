@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "ab200000000000000016",
+  "position": {
+    "x": 660,
+    "y": 225,
+    "z": 16,
+    "width": 600,
+    "height": 375,
+    "tabOrder": 16
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "quadrante"
+                }
+              },
+              "queryRef": "Fato_Produto.quadrante",
+              "nativeQueryRef": "quadrante",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "Produtos"
+                }
+              },
+              "queryRef": "Fato_Produto.Produtos",
+              "nativeQueryRef": "Produtos"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Produtos por segmento'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

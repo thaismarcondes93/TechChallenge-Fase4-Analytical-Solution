@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "ab200000000000000021",
+  "position": {
+    "x": 16,
+    "y": 384,
+    "z": 21,
+    "width": 1245,
+    "height": 307,
+    "tabOrder": 21
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "rotulo_produto"
+                }
+              },
+              "queryRef": "Fato_Produto.rotulo_produto",
+              "nativeQueryRef": "rotulo_produto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "categoria_nivel1"
+                }
+              },
+              "queryRef": "Fato_Produto.categoria_nivel1",
+              "nativeQueryRef": "categoria_nivel1"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "quadrante"
+                }
+              },
+              "queryRef": "Fato_Produto.quadrante",
+              "nativeQueryRef": "quadrante"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "Avaliações"
+                }
+              },
+              "queryRef": "Fato_Produto.Avaliações",
+              "nativeQueryRef": "Avaliações"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "Nota média"
+                }
+              },
+              "queryRef": "Fato_Produto.Nota média",
+              "nativeQueryRef": "Nota média"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "Nota ajustada média"
+                }
+              },
+              "queryRef": "Fato_Produto.Nota ajustada média",
+              "nativeQueryRef": "Nota ajustada média"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Produtos no recorte'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

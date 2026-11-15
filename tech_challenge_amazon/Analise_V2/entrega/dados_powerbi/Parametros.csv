@@ -1,0 +1,7 @@
+﻿parametro,valor,descricao
+rating_medio_geral,4.091851851851852,Média simples de rating (C do rating ajustado)
+rating_count_mediano,4740.0,Mediana de rating_count (m do rating ajustado)
+rating_q_baixo,3.9,Quantil 25% de rating: abaixo = grupo_nota Baixa
+rating_q_alto,4.3,Quantil 75% de rating: a partir daqui = grupo_nota Alta
+engajamento_q_baixo,1106.0,Quantil 25% de rating_count: até aqui = Baixo
+engajamento_q_alto,16020.0,Quantil 75% de rating_count: a partir daqui = Alto

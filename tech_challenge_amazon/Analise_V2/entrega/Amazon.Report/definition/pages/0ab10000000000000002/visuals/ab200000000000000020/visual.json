@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "ab200000000000000020",
+  "position": {
+    "x": 651,
+    "y": 109,
+    "z": 20,
+    "width": 610,
+    "height": 260,
+    "tabOrder": 20
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "categoria_nivel1"
+                }
+              },
+              "queryRef": "Fato_Produto.categoria_nivel1",
+              "nativeQueryRef": "categoria_nivel1",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fato_Produto"
+                    }
+                  },
+                  "Property": "Nota ponderada"
+                }
+              },
+              "queryRef": "Fato_Produto.Nota ponderada",
+              "nativeQueryRef": "Nota ponderada"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Nota ponderada por categoria'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

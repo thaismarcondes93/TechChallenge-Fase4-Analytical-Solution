@@ -1,0 +1,17 @@
+﻿campo,tipo_original,nulos_leitura_padrao,campos_vazios,marcadores_ausencia,total_ausente,percentual_ausente
+product_id,string,0,0,0,0,0.0
+product_name,string,0,0,0,0,0.0
+category,string,0,0,0,0,0.0
+discounted_price,string,0,0,0,0,0.0
+actual_price,string,0,0,0,0,0.0
+discount_percentage,string,0,0,0,0,0.0
+rating,string,0,0,0,0,0.0
+rating_count,string,2,2,0,2,0.137
+about_product,string,0,0,0,0,0.0
+user_id,string,0,0,0,0,0.0
+user_name,string,0,0,0,0,0.0
+review_id,string,0,0,0,0,0.0
+review_title,string,0,0,0,0,0.0
+review_content,string,0,0,0,0,0.0
+img_link,string,0,0,0,0,0.0
+product_link,string,0,0,0,0,0.0

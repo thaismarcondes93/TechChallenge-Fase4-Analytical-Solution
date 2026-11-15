@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "ab200000000000000033",
+  "position": {
+    "x": 16,
+    "y": 548,
+    "z": 33,
+    "width": 1236,
+    "height": 128,
+    "tabOrder": 33
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "As notas classificam produtos. As menções usam blocos de comentários em inglês e um dicionário de termos.",
+                    "textStyle": {
+                      "fontSize": "14pt",
+                      "fontWeight": "normal",
+                      "color": "#193047",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Use o filtro de categoria para restringir os dois visuais. O tema filtra o gráfico. Leia os trechos para verificar o contexto.",
+                    "textStyle": {
+                      "fontSize": "13pt",
+                      "fontWeight": "normal",
+                      "color": "#193047",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

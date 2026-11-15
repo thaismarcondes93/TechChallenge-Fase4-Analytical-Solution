@@ -1,0 +1,452 @@
+{
+  "name": "Amazon",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "pt-BR",
+    "sourceQueryCulture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "tables": [
+      {
+        "name": "Fato_Produto",
+        "columns": [
+          {
+            "name": "product_id",
+            "dataType": "string",
+            "sourceColumn": "product_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_name",
+            "dataType": "string",
+            "sourceColumn": "product_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "dataType": "string",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "categoria_nivel1",
+            "dataType": "string",
+            "sourceColumn": "categoria_nivel1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "categoria_nivel2",
+            "dataType": "string",
+            "sourceColumn": "categoria_nivel2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "categoria_folha",
+            "dataType": "string",
+            "sourceColumn": "categoria_folha",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "faixa_desconto",
+            "dataType": "string",
+            "sourceColumn": "faixa_desconto",
+            "summarizeBy": "none",
+            "sortByColumn": "ordem_desconto"
+          },
+          {
+            "name": "faixa_preco",
+            "dataType": "string",
+            "sourceColumn": "faixa_preco",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "about_product",
+            "dataType": "string",
+            "sourceColumn": "about_product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rotulo_produto",
+            "dataType": "string",
+            "sourceColumn": "rotulo_produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "review_title",
+            "dataType": "string",
+            "sourceColumn": "review_title",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "grupo_nota",
+            "dataType": "string",
+            "sourceColumn": "grupo_nota",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "grupo_engajamento",
+            "dataType": "string",
+            "sourceColumn": "grupo_engajamento",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quadrante",
+            "dataType": "string",
+            "sourceColumn": "quadrante",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "actual_price",
+            "dataType": "double",
+            "sourceColumn": "actual_price",
+            "summarizeBy": "none",
+            "formatString": "₹ #,0.00"
+          },
+          {
+            "name": "discounted_price",
+            "dataType": "double",
+            "sourceColumn": "discounted_price",
+            "summarizeBy": "none",
+            "formatString": "₹ #,0.00"
+          },
+          {
+            "name": "desconto_valor",
+            "dataType": "double",
+            "sourceColumn": "desconto_valor",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "discount_percentage",
+            "dataType": "double",
+            "sourceColumn": "discount_percentage",
+            "summarizeBy": "none",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "rating",
+            "dataType": "double",
+            "sourceColumn": "rating",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          },
+          {
+            "name": "rating_ajustado",
+            "dataType": "double",
+            "sourceColumn": "rating_ajustado",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "saldo_sentimento",
+            "dataType": "double",
+            "sourceColumn": "saldo_sentimento",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rating_count",
+            "dataType": "int64",
+            "sourceColumn": "rating_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "linhas_origem",
+            "dataType": "int64",
+            "sourceColumn": "linhas_origem",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ordem_desconto",
+            "dataType": "int64",
+            "sourceColumn": "ordem_desconto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tem_descricao",
+            "dataType": "int64",
+            "sourceColumn": "tem_descricao",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "n_palavras",
+            "dataType": "int64",
+            "sourceColumn": "n_palavras",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "palavras_positivas",
+            "dataType": "int64",
+            "sourceColumn": "palavras_positivas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "palavras_negativas",
+            "dataType": "int64",
+            "sourceColumn": "palavras_negativas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tem_comentario",
+            "dataType": "int64",
+            "sourceColumn": "tem_comentario",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Fato_Produto",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(PastaDados & \"\\Fato_Produto.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    Tipos = Table.TransformColumnTypes(Cabecalhos, {{\"product_id\", type text}, {\"product_name\", type text}, {\"category\", type text}, {\"categoria_nivel1\", type text}, {\"categoria_nivel2\", type text}, {\"categoria_folha\", type text}, {\"faixa_desconto\", type text}, {\"faixa_preco\", type text}, {\"about_product\", type text}, {\"rotulo_produto\", type text}, {\"review_title\", type text}, {\"grupo_nota\", type text}, {\"grupo_engajamento\", type text}, {\"quadrante\", type text}, {\"actual_price\", type number}, {\"discounted_price\", type number}, {\"desconto_valor\", type number}, {\"discount_percentage\", type number}, {\"rating\", type number}, {\"rating_ajustado\", type number}, {\"saldo_sentimento\", type number}, {\"rating_count\", Int64.Type}, {\"linhas_origem\", Int64.Type}, {\"ordem_desconto\", Int64.Type}, {\"tem_descricao\", Int64.Type}, {\"n_palavras\", Int64.Type}, {\"palavras_positivas\", Int64.Type}, {\"palavras_negativas\", Int64.Type}, {\"tem_comentario\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Produtos",
+            "expression": "DISTINCTCOUNT(Fato_Produto[product_id])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Categorias",
+            "expression": "DISTINCTCOUNT(Fato_Produto[categoria_nivel1])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Avaliações",
+            "expression": "SUM(Fato_Produto[rating_count])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nota média",
+            "expression": "AVERAGE(Fato_Produto[rating])",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Nota ponderada",
+            "expression": "VAR P = FILTER(Fato_Produto, NOT ISBLANK(Fato_Produto[rating]) && NOT ISBLANK(Fato_Produto[rating_count])) RETURN DIVIDE(SUMX(P, Fato_Produto[rating] * Fato_Produto[rating_count]), SUMX(P, Fato_Produto[rating_count]))",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Desconto médio",
+            "expression": "AVERAGE(Fato_Produto[discount_percentage])",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Preço original médio",
+            "expression": "AVERAGE(Fato_Produto[actual_price])",
+            "formatString": "₹ #,0.00"
+          },
+          {
+            "name": "Preço final médio",
+            "expression": "AVERAGE(Fato_Produto[discounted_price])",
+            "formatString": "₹ #,0.00"
+          },
+          {
+            "name": "Avaliações medianas",
+            "expression": "MEDIAN(Fato_Produto[rating_count])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nota ajustada média",
+            "expression": "AVERAGE(Fato_Produto[rating_ajustado])",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Alertas",
+            "expression": "CALCULATE([Produtos], KEEPFILTERS(Fato_Produto[quadrante] = \"Alerta\"))",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Estrelas",
+            "expression": "CALCULATE([Produtos], KEEPFILTERS(Fato_Produto[quadrante] = \"Estrela\"))",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Joias escondidas",
+            "expression": "CALCULATE([Produtos], KEEPFILTERS(Fato_Produto[quadrante] = \"Joia escondida\"))",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Correlação desconto e nota",
+            "expression": "VAR Pares = FILTER(Fato_Produto, NOT ISBLANK(Fato_Produto[discount_percentage]) && NOT ISBLANK(Fato_Produto[rating])) VAR X = AVERAGEX(Pares, Fato_Produto[discount_percentage]) VAR Y = AVERAGEX(Pares, Fato_Produto[rating]) RETURN DIVIDE(SUMX(Pares, (Fato_Produto[discount_percentage] - X) * (Fato_Produto[rating] - Y)), SQRT(SUMX(Pares, (Fato_Produto[discount_percentage] - X)^2) * SUMX(Pares, (Fato_Produto[rating] - Y)^2)))",
+            "formatString": "0.000"
+          }
+        ]
+      },
+      {
+        "name": "Fato_ProdutoTema",
+        "columns": [
+          {
+            "name": "product_id",
+            "dataType": "string",
+            "sourceColumn": "product_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tema",
+            "dataType": "string",
+            "sourceColumn": "tema",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "mencoes",
+            "dataType": "int64",
+            "sourceColumn": "mencoes",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Fato_ProdutoTema",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(PastaDados & \"\\Fato_ProdutoTema.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    Tipos = Table.TransformColumnTypes(Cabecalhos, {{\"product_id\", type text}, {\"tema\", type text}, {\"mencoes\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Menções",
+            "expression": "SUM(Fato_ProdutoTema[mencoes])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Menções por mil palavras",
+            "expression": "DIVIDE(1000 * [Menções], SUM(Fato_Produto[n_palavras]))",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Nota alta por mil",
+            "expression": "CALCULATE([Menções por mil palavras], KEEPFILTERS(Fato_Produto[grupo_nota] = \"Alta\"))",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Nota baixa por mil",
+            "expression": "CALCULATE([Menções por mil palavras], KEEPFILTERS(Fato_Produto[grupo_nota] = \"Baixa\"))",
+            "formatString": "0.00"
+          }
+        ]
+      },
+      {
+        "name": "Dim_Tema",
+        "columns": [
+          {
+            "name": "tema",
+            "dataType": "string",
+            "sourceColumn": "tema",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "palavras_chave",
+            "dataType": "string",
+            "sourceColumn": "palavras_chave",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dim_Tema",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(PastaDados & \"\\Dim_Tema.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    Tipos = Table.TransformColumnTypes(Cabecalhos, {{\"tema\", type text}, {\"palavras_chave\", type text}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Parametros",
+        "columns": [
+          {
+            "name": "parametro",
+            "dataType": "string",
+            "sourceColumn": "parametro",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "descricao",
+            "dataType": "string",
+            "sourceColumn": "descricao",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "valor",
+            "dataType": "double",
+            "sourceColumn": "valor",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Parametros",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(PastaDados & \"\\Parametros.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    Tipos = Table.TransformColumnTypes(Cabecalhos, {{\"parametro\", type text}, {\"descricao\", type text}, {\"valor\", type number}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "e8d737c2-0547-4ed1-8204-c25c9e13bc00",
+        "fromTable": "Fato_ProdutoTema",
+        "fromColumn": "product_id",
+        "toTable": "Fato_Produto",
+        "toColumn": "product_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "e8d737c2-0547-4ed1-8204-c25c9e13bc01",
+        "fromTable": "Fato_ProdutoTema",
+        "fromColumn": "tema",
+        "toTable": "Dim_Tema",
+        "toColumn": "tema",
+        "crossFilteringBehavior": "oneDirection"
+      }
+    ],
+    "expressions": [
+      {
+        "name": "PastaDados",
+        "kind": "m",
+        "expression": "\"C:\\Users\\thais\\OneDrive\\Documentos\\Pós -FIAP\\Challenge 4\\tech_challenge_amazon\\Analise_V2\\entrega\\dados_powerbi\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"PastaDados\",\"Fato_Produto\",\"Fato_ProdutoTema\",\"Dim_Tema\",\"Parametros\"]"
+      }
+    ]
+  }
+}

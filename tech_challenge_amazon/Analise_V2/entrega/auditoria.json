@@ -1,0 +1,33 @@
+{
+  "linhas_brutas": 1465,
+  "linhas_sem_product_id": 0,
+  "discount_percentage_invalidos": 0,
+  "rating_invalidos_texto": 1,
+  "rating_count_invalidos_texto": 0,
+  "rating_fora_de_1_a_5": 0,
+  "desconto_inconsistente_mais_de_2pp": 0,
+  "product_ids_unicos": 1351,
+  "linhas_duplicadas_de_product_id": 114,
+  "conflitos_numericos_entre_duplicatas": 39,
+  "produtos_sem_rating": 1,
+  "produtos_sem_rating_count": 2,
+  "produtos_sem_preco": 0,
+  "sha256": "4ba126c4ba8edd35e62e94ce1c853073d832de380184ab4f5f97d1e314882c77",
+  "linhas_csv": 1465,
+  "invalidos_por_campo": {
+    "actual_price": 0,
+    "discounted_price": 0,
+    "discount_percentage": 0,
+    "rating": 1,
+    "rating_count": 0
+  },
+  "conflitos_por_campo": {
+    "category": 0,
+    "actual_price": 1,
+    "discounted_price": 3,
+    "discount_percentage": 4,
+    "rating": 0,
+    "rating_count": 31
+  },
+  "produtos_finais": 1351
+}
