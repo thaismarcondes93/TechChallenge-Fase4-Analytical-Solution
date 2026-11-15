@@ -1,47 +1,53 @@
-# Vídeo executivo | roteiro de 6 min 40 s
+# Apresentação executiva | Amazon
 
-## 0:00–0:45 • Contexto
+**Duração total: 5 minutos.** Abra o PBIX na aba **Visão executiva**, com os filtros limpos. O roteiro combina a fala com a demonstração. Deixe as abas preparadas na ordem abaixo.
 
-“Nossa análise investiga quais produtos e categorias merecem atenção e o que preços, descontos e comentários acrescentam à decisão. Usamos uma fotografia do catálogo, com preços em rupias indianas e avaliações acumuladas. O estudo descreve engajamento e satisfação percebida.”
+## 0:00–0:55 | Visão executiva · Contexto, indicadores e primeiro filtro
 
-Mostre a página Visão executiva.
+**Na tela:** mostre os cartões e o gráfico **Avaliações acumuladas por categoria**. Selecione **Electronics**, aponte a mudança nos cartões e limpe o filtro.
 
-## 0:45–1:40 • Indicadores e qualidade
+**Fala:** “A pergunta é onde a liderança deve concentrar atenção no catálogo e quais decisões vale testar. Consolidamos 1.465 registros em **1.351 produtos de nove categorias**. O catálogo acumula **23,8 milhões de avaliações**, nossa medida de engajamento, e tem **nota ponderada de 4,16 de 5**. Aqui, ao filtrar Electronics, vemos o primeiro foco de investigação. A categoria concentra cerca de **60% das avaliações** e **16 dos 21 produtos em Alerta**.”
 
-“O CSV tem 1.465 registros. Após tratar os 114 registros excedentes por SKU, o portfólio tem 1.351 produtos e nove categorias. Encontramos duas contagens vazias e um registro com nota inválida. Os valores ausentes foram preservados. O portfólio acumula 23,8 milhões de avaliações, tem nota ponderada de 4,16 de 5 e desconto informado médio de 46,7%.”
+## 0:55–1:45 | Produtos e categorias · Prioridade por produto
 
-Selecione Electronics. Compare 490 produtos e 14,2 milhões de avaliações. A categoria concentra 59,7% do total. Limpe o filtro.
+**Na tela:** mostre a dispersão **Engajamento x Satisfação por produto**. Selecione **Segmento → Alerta** e ordene a tabela por **Avaliações**, da maior para a menor. Aponte o primeiro resultado e limpe o filtro.
 
-## 1:40–2:45 • Prioridades de produto
+**Fala:** “Cada ponto é um produto. O eixo horizontal mostra avaliações acumuladas em escala logarítmica, e o vertical mostra a nota. O filtro Alerta destaca produtos com engajamento alto e nota baixa em relação aos cortes do catálogo. Ordenar por avaliações nos dá uma fila de investigação. O primeiro exemplo é o **boAt Airdopes 121v2**, com **nota 3,8** e cerca de **181 mil avaliações**. O painel também identifica **81 Joias escondidas**, produtos bem avaliados e com baixo engajamento, candidatos a um teste de exposição.”
 
-“Dez SKUs concentram 15,2% das avaliações. Encontramos 21 produtos com engajamento alto e nota baixa, incluindo 16 em Electronics. A primeira ação é revisar esses casos começando pelos mais avaliados. Encontramos também 81 produtos com nota alta e baixo engajamento, candidatos a um teste de exposição.”
+## 1:45–2:25 | Preços e descontos · Estratégia comercial
 
-Na aba Produtos e categorias, filtre Alerta e ordene pela coluna Avaliações. Troque para Joia escondida e ordene pela nota ajustada. Explique que os cortes são relativos à amostra.
+**Na tela:** aponte os preços original e final por faixa, em rupias indianas. Mostre a dispersão **Desconto x Nota por produto** e o cartão da correlação com os filtros limpos.
 
-## 2:45–3:45 • Preços e descontos
+**Fala:** “O desconto médio informado é de **46,7%**. O gráfico da esquerda mostra os preços original e final por faixa de desconto. Na dispersão, o desconto tem uma **associação fraca com a nota**, com correlação de Pearson de **−0,162** no catálogo. Para decidir sobre promoções, proponho testar ofertas dentro da mesma categoria e faixa de preço e acompanhar conversão e margem.”
 
-“Na amostra, a correlação entre desconto e nota é pequena e negativa. Pearson é −0,162 e Spearman é −0,150. O catálogo é transversal. Para decidir sobre descontos, proponho testar diferentes faixas dentro da mesma categoria e acompanhar conversão e margem.”
+## 2:25–3:55 | Customer Insights · O que os comentários acrescentam
 
-Mostre preços original e final por faixa. Selecione uma categoria e uma faixa para demonstrar o recorte.
+**Na tela:** compare as barras de **Instalação e facilidade de uso** e **Preço e custo-benefício** com os filtros limpos. Depois selecione **Tema → Preço e custo-benefício** e aponte a tabela **Produtos para leitura de contexto**. Leia o exemplo do controle remoto a partir deste roteiro. A tabela exibe títulos agregados e descrições de produtos.
 
-## 3:45–4:50 • Customer Insights
+**Fala:** “O que os clientes valorizam? Nos comentários de produtos bem avaliados aparecem elogios à **instalação simples, ao uso imediato e ao custo-benefício**. Facilidade de uso é um padrão desse grupo, com **6,30 menções por mil palavras**, ante **3,96** no grupo de nota baixa.
 
-“Preço e custo-benefício aparecem cerca de 12,86 vezes por mil palavras nos SKUs de nota baixa e 10,47 nos de nota alta. Qualidade e acabamento apresentam 10,44 contra 8,73. Instalação e facilidade de uso aparecem mais nos produtos de nota alta. Essa comparação usa temas detectados por palavras e notas agregadas de produtos. A equipe pode validar a leitura abrindo exemplos nas categorias prioritárias.”
+Nos produtos de nota baixa, **preço e custo-benefício**, **qualidade e acabamento** e **som, imagem e desempenho** foram os temas mais citados. Entre os quatro tipos de crítica que pesquisamos diretamente no texto, **falhas de funcionamento** tiveram o maior alcance, com expressões encontradas em **56 produtos**.
 
-Mostre o gráfico com as duas séries. Filtre uma categoria e use os títulos e as descrições como ponto de partida. Mostre um trecho na seção 4 do notebook e explique que o mesmo bloco pode conter elogio e reclamação.
+Um controle remoto com **nota 3,6** exemplifica como usar isso. A nota indica qual produto investigar. O comentário relata que o botão de mudar de canal não funciona e indica qual função testar. As barras medem menções por mil palavras, e os grupos usam a nota agregada do produto.”
 
-## 4:50–6:10 • Recomendações
+## 3:55–4:40 | Recomendações · Decisões e acompanhamento
 
-- Liste os Alertas por volume de avaliações e revise cadastro, expectativas e causas recorrentes com as equipes de categoria e qualidade.
-- Teste exposição para Joias escondidas com volume mínimo de evidência. Capture impressões e acompanhe conversão e margem.
-- Teste promoções com grupo de comparação e faça a leitura por categoria e faixa de preço.
-- Leia amostras de textos para validar os temas e corrija as descrições quando as evidências convergirem.
+**Na tela:** mostre os blocos de recomendações. Aponte a ação e a métrica de acompanhamento enquanto fala.
 
-Mostre a aba Recomendações e indique as páginas em que cada recorte é reproduzido.
+**Fala:** “Primeiro, revisar os **Alertas de Electronics** por volume de avaliações. A equipe pode ler os comentários para orientar testes de funcionamento e revisões de cadastro e qualidade. Segundo, testar exposição para um grupo de **Joias escondidas** e acompanhar impressões, conversão e nota. Terceiro, comparar descontos com um **grupo de controle** e medir conversão e margem. A base atual dá o ponto de partida. Essas métricas comerciais entram na próxima etapa.”
 
-## 6:10–6:40 • Conclusão
+## 4:40–5:00 | Conclusão executiva · O que a liderança deve levar
 
-“Começamos pelos 21 Alertas e usamos comentários para investigar as causas. Em paralelo, testamos exposição dos produtos bem avaliados e avaliamos descontos com dados de impressão, conversão e margem. O painel permite acompanhar os segmentos e levar os casos prioritários às equipes responsáveis.”
+**Na tela:** permaneça em **Recomendações**.
 
-Reserve até 20 segundos de margem. Grave depois de conferir os cartões, os filtros e a navegação no PBIX salvo.
+**Fala:** “A liderança deve levar três mensagens. **Começar pelos Alertas em Electronics. Usar os comentários para descobrir o que corrigir. Testar exposição e descontos com métricas comerciais antes de ampliar as ações.**”
+
+## Apoio para o ensaio
+
+- **O que os clientes valorizam:** facilidade de uso e valor percebido nos exemplos de elogio. O SKU `B00V4BGDKU` (nota **4,5**) inclui “plug and play and easy to use”. O SKU `B09HCH3JZG` (nota **4,4**) inclui “Great value for money”.
+- **Problemas recorrentes na busca complementar:** falhas de funcionamento (**56 SKUs**), críticas ao preço (**16**), ao acabamento (**9**) e à bateria ou recarga (**6**). As contagens representam produtos de nota baixa com pelo menos uma das expressões pesquisadas. Podem se sobrepor e foram calculadas a partir do CSV, fora do painel.
+- **Padrão nos produtos de nota alta:** instalação e facilidade de uso teve **6,30** menções por mil palavras, ante **3,96** no grupo de nota baixa.
+- **Temas nos produtos de nota baixa:** preço e custo-benefício (**12,86** por mil palavras), qualidade e acabamento (**10,44**) e som, imagem e desempenho (**8,97**). No grupo de nota alta, preço e qualidade tiveram **10,47** e **8,73**, respectivamente. As barras medem tema independentemente do tom. Um produto pode reunir elogios e críticas no mesmo bloco.
+- **Exemplo de falha para a fala:** o SKU `B09L8DSSFH`, com nota **3,6**, inclui “the channel button doesn't work”.
+- **Checagem pré-gravação:** confirme no Desktop se Electronics altera os cartões, se Alerta atualiza a dispersão e a tabela e se o tema restringe a lista de contexto. O PBIX foi salvo em **Recomendações**. Volte à **Visão executiva** antes de iniciar. Se o ensaio estourar o tempo, encurte as transições e preserve o fechamento.
 
