@@ -1,0 +1,17 @@
+# Arquivos locais do Python e do Jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Configurações locais de editores
+.vscode/
+.idea/
+
+# Artefatos temporários do Power BI
+*.pbix.~*
+*.tmp
+
+# Não versionar chaves, credenciais ou caminhos pessoais
+.env
